@@ -13,6 +13,7 @@
 
 --You should have received a copy of the GNU Affero General Public License
 --along with this program.  If not, see <http://www.gnu.org/licenses/>.
+local export = {}
 local function eq(x, y)
 	if type(x) == "table" then
 		if type(y) ~= "table" then return false end
@@ -27,6 +28,8 @@ local function eq(x, y)
 		return x == y
 	end
 end
+export.eq = eq
+
 local function elem(x, xs)
 	if x == nil then return true end
 	for _, i in pairs(x) do
@@ -34,9 +37,13 @@ local function elem(x, xs)
 	end
 	return false
 end
+export.elem = elem
+
 local function notElem(x, xs)
 	return not elem(x, xs)
 end
+export.notElem = notElem
+
 local function filter(f, xs)
 	r = {}
 	for _, x in pairs(xs) do
@@ -46,7 +53,15 @@ local function filter(f, xs)
 	end
 	return r
 end
-return {eq=eq,
-		elem=elem,
-		notElem=notElem,
-		filter=filter}
+export.filter = filter
+
+local function map(f, xs)
+	r = {}
+	for k, v in pairs(xs) do
+		r[k] = f(v)
+	end
+	return r
+end
+export.map = map
+
+return export
