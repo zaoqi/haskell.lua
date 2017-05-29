@@ -1,2 +1,0 @@
-# haskell.lua
-Haskell-like
